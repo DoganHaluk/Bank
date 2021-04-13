@@ -14,11 +14,17 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         System.out.println("Kies een transactie:");
-        System.out.println("1. Nieuwe rekening\n" +
-                "2. Saldo consulteren\n" +
-                "3. Overschrijven");
+        System.out.println(
+                "1. Nieuwe rekening\n" +
+                        "2. Saldo consulteren\n" +
+                        "3. Overschrijven\n" +
+                        "4. Stop");
         var scanner = new Scanner(System.in);
         var transactie = scanner.nextInt();
+        while (transactie < 1 || transactie > 4) {
+            System.out.println("Kies een geldig nummer!");
+            transactie = scanner.nextInt();
+        }
         switch (transactie) {
             case 1:
                 System.out.println("Tik een nieuw bankrekeningnummer om een nieuwe rekening aan te maken:");
@@ -83,6 +89,8 @@ class Main {
                 } catch (OnvoldoendeSaldoException ex) {
                     System.out.println("Saldo is onvoldoende.");
                 }
+                break;
+            case 4:
                 break;
             default:
                 System.out.println("Geen keuze 1 tot 3 gegeven");
