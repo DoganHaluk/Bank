@@ -77,7 +77,6 @@ class Main {
                     scanner2 = new Scanner(System.in);
                     bedrag = scanner2.nextBigDecimal();
                 }
-                ;
                 var repository3 = new RekeningRepository();
                 try {
                     repository3.overschrijvenDeBankrekeningen(rekeningen, bedrag);
