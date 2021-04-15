@@ -19,16 +19,8 @@ public class RekeningRepository extends AbstractRepository {
                 statementInsert.executeUpdate();
                 connection.commit();
             } catch (SQLException ex) {
-                try (var statementSelect = connection.prepareStatement(
-                        "SELECT nummer FROM rekeningen WHERE nummer = ?")) {
-                    statementSelect.setObject(1, rekening);
-                    if (statementSelect.executeQuery().next()) {
-                        connection.commit();
-                        throw new RekeningBestaatAlException();
-                    }
-                    connection.commit();
-                    throw ex;
-                }
+                connection.commit();
+                throw new RekeningBestaatAlException();
             }
         }
     }
@@ -42,10 +34,12 @@ public class RekeningRepository extends AbstractRepository {
             statement.setString(1, rekening);
             var result = statement.executeQuery();
             if (result.next()) {
+                connection.commit();
                 return result.getBigDecimal("saldo");
+            } else {
+                connection.rollback();
+                throw new RekeningNietGevondenException();
             }
-            connection.rollback();
-            throw new RekeningNietGevondenException();
         }
     }
 
