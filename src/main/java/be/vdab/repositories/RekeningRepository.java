@@ -50,8 +50,8 @@ public class RekeningRepository extends AbstractRepository {
     }
 
     public void overschrijvenDeBankrekeningen(String vanRekening, String naarRekening, BigDecimal bedrag) throws SQLException {
-        var vanRekeningUpdate = "UPDATE rekeningen SET saldo=saldo-? WHERE nummer = ?";
-        var naarRekeningUpdate = "UPDATE rekeningen SET saldo=saldo+? WHERE nummer = ?";
+        var vanRekeningUpdate = "UPDATE rekeningen SET saldo = saldo - ? WHERE nummer = ?";
+        var naarRekeningUpdate = "UPDATE rekeningen SET saldo = saldo + ? WHERE nummer = ?";
         try (var connection = super.getConnection();
              var statementVanUpdate = connection.prepareStatement(vanRekeningUpdate)) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

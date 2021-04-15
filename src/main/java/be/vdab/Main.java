@@ -54,7 +54,6 @@ class Main {
                         var vanSaldo = repository3.consulteerHetSaldo(vanRekening);
 
                         System.out.println("Tik op een bankrekeningnummer waarnaar u wilt overschrijven:");
-                        scanner = new Scanner(System.in);
                         var naarRekening = scanner.nextLine();
                         var rekening2 = new Rekening(vanRekening, naarRekening);
                         try {
@@ -62,14 +61,13 @@ class Main {
                             repository3.consulteerHetSaldo(naarRekening);
 
                             System.out.println("Tik op het over te boeken bedrag:");
-                            scanner = new Scanner(System.in);
                             var bedrag = scanner.nextBigDecimal();
                             while (bedrag.compareTo(BigDecimal.ZERO) <= 0) {
                                 System.out.print("Bedrag moet positief zijn, probeer opnieuw:");
                                 bedrag = scanner.nextBigDecimal();
                             }
-                            var rekening3 = new Rekening(bedrag, vanSaldo);
 
+                            var rekening3 = new Rekening(bedrag, vanSaldo);
                             var repository4 = new RekeningRepository();
                             try {
                                 rekening3.isGeldigBedrag(bedrag, vanSaldo);
