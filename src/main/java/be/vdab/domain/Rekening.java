@@ -29,10 +29,8 @@ public class Rekening {
     }
 
     public void isGeldigeIban(String iban) {
-        var controlgetal = Long.parseLong(iban.substring(2, 4));
-        if (iban.length() != 16 || !iban.startsWith("BE") || controlgetal < 2 || controlgetal > 98) {
-            throw new VerkeerdRekeningnummerException();
-        } else if ((Long.parseLong(iban.substring(4, 16)) * 1000000 + 1114 * 100 + controlgetal) % 97 != 1) {
+        var controlgetal = iban.substring(2, 4);
+        if (iban.length() != 16 || !iban.startsWith("BE") || Integer.parseInt(controlgetal) < 2 || Integer.parseInt(controlgetal) > 98 || Long.parseLong(iban.substring(4, 16).concat("1114").concat(controlgetal)) % 97 != 1) {
             throw new VerkeerdRekeningnummerException();
         }
     }
