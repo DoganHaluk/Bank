@@ -41,7 +41,7 @@ public class Rekening {
         }
     }
 
-    public void isGeldigBedrag(BigDecimal bedrag, BigDecimal saldo) {
+    public void isVoldoendeSaldo(BigDecimal bedrag, BigDecimal saldo) {
         if (saldo.compareTo(bedrag) < 0) {
             throw new OnvoldoendeSaldoException();
         }

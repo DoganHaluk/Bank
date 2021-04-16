@@ -70,7 +70,7 @@ class Main {
                             var rekening3 = new Rekening(bedrag, vanSaldo);
                             var repository4 = new RekeningRepository();
                             try {
-                                rekening3.isGeldigBedrag(bedrag, vanSaldo);
+                                rekening3.isVoldoendeSaldo(bedrag, vanSaldo);
                                 repository4.overschrijvenDeBankrekeningen(vanRekening, naarRekening, bedrag);
                                 System.out.println("Overdracht heeft plaatsgevonden.");
                             } catch (SQLException ex) {
